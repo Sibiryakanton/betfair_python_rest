@@ -6,25 +6,6 @@ from dataclasses import dataclass
 @dataclass
 class AbstractMarketFilter(BaseForm):
     '''
-    The MarketFilter form used in the Betfair Exchange API
-    is quite common and consists of dozens of arguments.
-    In this case, it would be a bad idea to copy the arguments
-     from method to method along with dockstring. Instead of
-     copy paste, a separate class was added, in which all the
-      attributes of the form will be defined once, then an
-      instance of this class will be passed to the input of
-      the methods that perform http requests, and there the
-      contents of the class will simply be translated into
-      a dictionary format and submitted to the request.
-    Let's look at an example with the BetFairAPIManager.list_event_types request
-    Instead of taking dozens of MarketFilter arguments, the function always
-    takes two: market_filter for the BetFairMarketFilter class and locale
-    for choosing the response language. So, it would be used like that:
-    ___
-    market_filter = MarketFilter(text_query='Text'. race_types='Chase')
-    api_manager = BetFairAPIManagerBetting(login='login', password='password', api_kay='api_key')
-    list_event_types_response = api_manager.list_event_types(market_filter=market_filter, locale='ru')
-    ___
     List of params of MarketFilter below.
         :param text_query: string, Restrict markets by any text associated
         with the market such as the Name, Event, Competition, etc.

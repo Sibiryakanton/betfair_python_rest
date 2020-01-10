@@ -1,7 +1,7 @@
-from enum import Enum
+from ..base import BaseEnum
 
 
-class TimeGranularity(Enum):
+class TimeGranularity(BaseEnum):
     DAYS = 'DAYS'
     HOURS = 'HOURS'
     MINUTES = 'MINUTES'

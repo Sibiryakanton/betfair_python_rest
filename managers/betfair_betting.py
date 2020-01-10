@@ -19,16 +19,14 @@ class BetFairAPIManagerBetting(BaseAPIManager):
     root = 'https://api.betfair.com/exchange/betting/rest/v1.0'
 
     def list_event_types(self, request_class_object):
-        # TODO протестировать
         '''
         Returns a list of Event Types (i.e. Sports) associated with the markets selected by the MarketFilter.
         Get list of event types (for example, Soccer, Basketball and etc)
         :param request_class_object: The MarketFilterAndLocaleForm object
         '''
-        return self.__request_with_market_filter('listEventTypes', request_class_object)
+        return self.__request_with_dataclass('listEventTypes', request_class_object)
 
     def list_competitions(self, request_class_object):
-        # TODO протестировать
         '''
         Returns a list of Competitions (i.e., World Cup 2013, Bundesliga) associated with
         the markets selected by the MarketFilter.
@@ -37,7 +35,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_market_filter('listCompetitions', request_class_object)
+        return self.__request_with_dataclass('listCompetitions', request_class_object)
 
     def list_time_ranges(self, market_filter, granularity):
         # TODO протестировать
@@ -62,7 +60,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
         :param request_class_object: The MarketFilterAndLocaleForm object
         '''
-        return self.__request_with_market_filter('listEvents', request_class_object)
+        return self.__request_with_dataclass('listEvents', request_class_object)
 
     def list_market_types(self, request_class_object):
         '''
@@ -73,7 +71,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_market_filter('listMarketTypes', request_class_object)
+        return self.__request_with_dataclass('listMarketTypes', request_class_object)
 
     def list_countries(self, request_class_object):
         # TODO протестировать
@@ -82,7 +80,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_market_filter('listCountries', request_class_object)
+        return self.__request_with_dataclass('listCountries', request_class_object)
 
     def list_venues(self, request_class_object):
         # TODO протестировать
@@ -94,7 +92,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_market_filter('listVenues', request_class_object)
+        return self.__request_with_dataclass('listVenues', request_class_object)
 
     def list_market_catalogue(self, market_filter, market_projection, max_results, sort=None, locale=None):
         # TODO Протестировать
@@ -382,7 +380,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         if self.log_mode:
             print(json.dumps(json.loads(response.text), indent=4))
 
-    def __request_with_market_filter(self, relative_url, request_object, method_type='post'):
+    def __request_with_dataclass(self, relative_url, request_object, method_type='post'):
         '''
         Some of the requests have a common request structure,
          which can be easily put into a template function,
