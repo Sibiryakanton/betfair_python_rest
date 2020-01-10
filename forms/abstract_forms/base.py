@@ -1,11 +1,11 @@
 from dataclasses import dataclass
+from abc import abstractmethod
 
 
 @dataclass
 class BaseForm:
 
-    @property
+    @abstractmethod
     def data(self):
-        data = locals()
-        return data
+        raise AttributeError('the data attribute is required')
 

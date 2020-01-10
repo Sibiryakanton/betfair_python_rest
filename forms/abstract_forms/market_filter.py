@@ -1,7 +1,10 @@
-from base import BaseForm
+from .base import BaseForm
+from datetime import datetime
+from dataclasses import dataclass
 
 
-class MarketFilter(BaseForm):
+@dataclass
+class AbstractMarketFilter(BaseForm):
     '''
     The MarketFilter form used in the Betfair Exchange API
     is quite common and consists of dozens of arguments.
@@ -80,18 +83,18 @@ class MarketFilter(BaseForm):
     '''
     text_query: str = None
     event_type_ids: list = None
-    event_ids: list = None,
+    event_ids: list = None
     competitions_ids: list = None
     market_ids: list = None
-    venues: list = None,
+    venues: list = None
     bsp_only: bool = None
     in_play_enabled: bool = None
-    in_play_only: bool = None,
+    in_play_only: bool = None
     market_betting_types: list = None
-    market_countries: list = None,
+    market_countries: list = None
     market_type_codes: list = None
-    market_start_time = None,
-    with_orders = None
+    market_start_time: datetime.time = None
+    with_orders: bool = None
     race_types: list = None
 
     @property

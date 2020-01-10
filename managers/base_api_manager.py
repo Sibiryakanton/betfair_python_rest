@@ -34,16 +34,16 @@ class BaseAPIManager:
         '''
         raise AttributeError('The root is required attribute')
 
-    @abstractmethod
     @property
+    @abstractmethod
     def crt_path(self, value):
         '''
         Path to certificate
         '''
         raise AttributeError('The path to certificate is required')
 
-    @abstractmethod
     @property
+    @abstractmethod
     def crt_key_path(self, value):
         '''
         Path to certificate key

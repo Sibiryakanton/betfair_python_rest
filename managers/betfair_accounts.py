@@ -3,7 +3,7 @@ from abc import abstractmethod
 from .base_api_manager import BaseAPIManager
 
 
-class BetFairAPIManagerBetting(BaseAPIManager):
+class BetFairAPIManagerAccounts(BaseAPIManager):
     '''
     The class provides the functional of Betfair Exchange API, described by company on link below:
     https://docs.developer.betfair.com/
@@ -11,22 +11,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
     # TODO Составить полную карту запросов
 
     root = 'https://api.betfair.com/exchange/account/rest/v1.0'
-
-    @abstractmethod
-    @property
-    def crt_path(self, value):
-        '''
-        Path to certificate
-        '''
-        raise AttributeError('The path to certificate is required')
-
-    @abstractmethod
-    @property
-    def crt_key_path(self, value):
-        '''
-        Path to certificate key
-        '''
-        raise AttributeError('The path to certificate is required')
 
     def get_account_details(self):
         response = self._make_request('getAccountDetails', root_index=1, data={})

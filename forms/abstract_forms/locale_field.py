@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from base import BaseForm
+from .base import BaseForm
 
 
 @dataclass

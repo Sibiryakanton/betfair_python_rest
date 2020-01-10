@@ -9,7 +9,7 @@ from .base_api_manager import BaseAPIManager
 log = logging.getLogger('django.parsers')
 
 
-class BetFairAPIManager(BaseAPIManager):
+class BetFairAPIManagerBetting(BaseAPIManager):
     '''
     The class provides the functional of Betfair Exchange API, described by company on link below:
     https://docs.developer.betfair.com/
