@@ -18,32 +18,26 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
     root = 'https://api.betfair.com/exchange/betting/rest/v1.0'
 
-    def list_event_types(self, market_filter, locale=None):
+    def list_event_types(self, request_class_object):
         # TODO протестировать
-
         '''
         Returns a list of Event Types (i.e. Sports) associated with the markets selected by the MarketFilter.
         Get list of event types (for example, Soccer, Basketball and etc)
-        :param market_filter: The filter class to select desired markets. All markets that match the
-        criteria in the filter are selected.
-        :param locale: string. The language used for the response. If not specified, the default is returned.
-
+        :param request_class_object: The MarketFilterAndLocaleForm object
         '''
-        return self.__request_with_market_filter('listEventTypes', market_filter, locale=locale)
+        return self.__request_with_market_filter('listEventTypes', request_class_object)
 
-    def list_competitions(self, market_filter, locale=None):
+    def list_competitions(self, request_class_object):
         # TODO протестировать
         '''
         Returns a list of Competitions (i.e., World Cup 2013, Bundesliga) associated with
         the markets selected by the MarketFilter.
         Currently only Football markets have an associated competition.
 
-        :param market_filter: The filter class to select desired markets. All markets that match the
-        criteria in the filter are selected.
+        :param request_class_object: The MarketFilterAndLocaleForm object
 
-        :param locale: string. The language used for the response. If not specified, the default is returned.
         '''
-        return self.__request_with_market_filter('listCompetitions', market_filter, locale=locale)
+        return self.__request_with_market_filter('listCompetitions', request_class_object)
 
     def list_time_ranges(self, market_filter, granularity):
         # TODO протестировать
@@ -61,64 +55,46 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         self.print_response(response)
         return response.json()
 
-    def list_events(self, market_filter, locale=None):
+    def list_events(self, request_class_object):
         '''
         Returns a list of Events (i.e, Reading vs. Man United)
         associated with the markets selected by the MarketFilter.
 
-        :param market_filter: The filter class to select desired
-        markets. All markets that match the
-        criteria in the filter are selected.
-
-        :param locale: string. The language used for the response.
-         If not specified, the default is returned.
-        :return:
+        :param request_class_object: The MarketFilterAndLocaleForm object
         '''
-        return self.__request_with_market_filter('listEvents', market_filter, locale=locale)
+        return self.__request_with_market_filter('listEvents', request_class_object)
 
-    def list_market_types(self, market_filter, locale=None):
+    def list_market_types(self, request_class_object):
         '''
         Returns a list of market types (i.e. MATCH_ODDS, NEXT_GOAL)
         associated with the markets selected by the MarketFilter.
         The market types are always the same, regardless of locale.
 
-        :param market_filter: The filter class to select desired
-        markets. All markets that match the
-        criteria in the filter are selected.
+        :param request_class_object: The MarketFilterAndLocaleForm object
 
-        :param locale: string. The language used for the response.
-         If not specified, the default is returned.
-        :return:
-        :return:
         '''
-        return self.__request_with_market_filter('listMarketTypes', market_filter, locale=locale)
+        return self.__request_with_market_filter('listMarketTypes', request_class_object)
 
-    def list_countries(self, market_filter, locale=None):
+    def list_countries(self, request_class_object):
         # TODO протестировать
         '''
         Returns a list of Countries associated with the markets selected by the MarketFilter.
-        :param market_filter: The filter class to select desired markets. All markets that match the
-        criteria in the filter are selected.
+        :param request_class_object: The MarketFilterAndLocaleForm object
 
-        :param locale: string. The language used for the response. If not specified, the default is returned.
-        :return:
         '''
-        return self.__request_with_market_filter('listCountries', market_filter, locale=locale)
+        return self.__request_with_market_filter('listCountries', request_class_object)
 
-    def list_venues(self, market_filter, locale=None):
+    def list_venues(self, request_class_object):
         # TODO протестировать
         '''
         Returns a list of Venues (i.e. Cheltenham, Ascot) associated
         with the markets selected by the MarketFilter. Currently,
         only Horse Racing markets are associated with a Venue.
 
-        :param market_filter: The filter class to select desired markets. All markets that match the
-        criteria in the filter are selected.
+        :param request_class_object: The MarketFilterAndLocaleForm object
 
-        :param locale: string. The language used for the response. If not specified, the default is returned.
-        :return:
         '''
-        return self.__request_with_market_filter('listVenues', market_filter, locale=locale)
+        return self.__request_with_market_filter('listVenues', request_class_object)
 
     def list_market_catalogue(self, market_filter, market_projection, max_results, sort=None, locale=None):
         # TODO Протестировать
@@ -406,7 +382,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         if self.log_mode:
             print(json.dumps(json.loads(response.text), indent=4))
 
-    def __request_with_market_filter(self, relative_url, market_filter, locale=None, method_type='post'):
+    def __request_with_market_filter(self, relative_url, request_object, method_type='post'):
         '''
         Some of the requests have a common request structure,
          which can be easily put into a template function,
@@ -419,13 +395,9 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         https://api.betfair.com/exchange/betting/rest/v1.0/
         And listEventTypes - relative url
 
-        :param market_filter: The filter class to select desired markets. All markets that match the
-        criteria in the filter are selected.
-
-        :param locale: The language used for the response. If not specified, the default is returned.
+        :param request_object: The form class with all request data. You can view the examples in forms directory
         :return:
         '''
-        data = {'filter': market_filter.data, 'locale': locale}
-        response = self._make_request(relative_url, data=data, method_type=method_type)
+        response = self._make_request(relative_url, data=request_object.data, method_type=method_type)
         self.print_response(response)
         return response.json()

@@ -4,4 +4,8 @@ from .base import BaseForm
 
 @dataclass
 class AbstractLocaleField(BaseForm):
-    locale: str
+    locale: str = None
+
+    @property
+    def data(self):
+        pass
