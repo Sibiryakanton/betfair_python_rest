@@ -1,15 +1,9 @@
 import json
-import os
-import requests
-from datetime import timedelta, datetime
-import logging
 from abc import abstractmethod
 from .base_api_manager import BaseAPIManager
 
-log = logging.getLogger('django.parsers')
 
-
-class BetFairAPIManager(BaseAPIManager):
+class BetFairAPIManagerBetting(BaseAPIManager):
     '''
     The class provides the functional of Betfair Exchange API, described by company on link below:
     https://docs.developer.betfair.com/
@@ -49,7 +43,7 @@ class BetFairAPIManager(BaseAPIManager):
 
     def print_response(self, response):
         '''
-        Not just response.json(), because we need print response with indent
+        Not just response.json(), because we need indents
         '''
         if self.log_mode:
             print(json.dumps(json.loads(response.text), indent=4))
