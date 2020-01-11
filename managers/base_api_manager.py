@@ -6,7 +6,7 @@ import os
 
 class BaseAPIManager:
     '''
-    Базовый класс, который нужно использовать для каждого добавляемого API-менеджера
+    Base class for each adding api manager
     '''
     session = requests.Session()
     cert_login = 'https://identitysso-cert.betfair.{}/api/certlogin'
@@ -38,7 +38,7 @@ class BaseAPIManager:
     @property
     def root(self, value):
         '''
-        Корень API
+        API root
         '''
         raise AttributeError('The root is required attribute')
 
@@ -96,7 +96,7 @@ class BaseAPIManager:
         https://api.betfair.com/exchange/betting/rest/v1.0/
         And listEventTypes - relative url
 
-        :param data: данные, которые нужно передать в запросе
+        :param data: data, which need to send with request
         :return:
         '''
         root = self.root.format(self.domain_area)

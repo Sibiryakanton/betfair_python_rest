@@ -112,25 +112,17 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('listMarketBook', request_class_object)
 
-    def list_runner_book(self, market_id, selection_id, handicap=None, book_form=None):
-        # TODO протестировать
+    def list_runner_book(self, request_class_object):
         '''
         Returns a list of dynamic data about a market and a specified runner.
          Dynamic data includes prices, the status of the market, the status
          of selections, the traded volume, and the status of any
          orders you have placed in the market.
-        :param selection_id: The unique id for the selection in the market.
-        :param market_id: The unique id for the market.
-        :param handicap: The projection of price data you want to
-        receive in the response.
-        '''
-        data = {'marketId': market_id, 'selectionId': selection_id,
-                'handicap': handicap}
-        data.update(book_form.data)
 
-        response = self._make_request('listRunnerBook', data=data)
-        self.print_response(response)
-        return response.json()
+        :param request_class_object: The ListRunnerBookForm object
+
+        '''
+        return self.__request_with_dataclass('listRunnerBook', request_class_object)
 
     def list_market_profit_and_loss(self, market_ids, include_settled_bets,
                                     include_bsp_bets, net_of_commission):
