@@ -18,5 +18,4 @@ class MarketFilterAndTimeGranularityForm(BaseForm, MarketFilter, TimeGranularity
 
     @property
     def data(self):
-        print({'filter': self.market_filter_data, 'granularity': self.time_granularity})
         return {'filter': self.market_filter_data, 'granularity': self.time_granularity}

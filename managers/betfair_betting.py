@@ -40,7 +40,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listCompetitions', request_class_object)
 
     def list_time_ranges(self, request_class_object):
-        # TODO протестировать
         '''
         Returns a list of time ranges in the granularity
         specified in the request (i.e. 3PM to 4PM, Aug 14th to Aug 15th)
@@ -71,7 +70,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listMarketTypes', request_class_object)
 
     def list_countries(self, request_class_object):
-        # TODO протестировать
         '''
         Returns a list of Countries associated with
         the markets selected by the MarketFilter.
@@ -81,7 +79,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listCountries', request_class_object)
 
     def list_venues(self, request_class_object):
-        # TODO протестировать
         '''
         Returns a list of Venues (i.e. Cheltenham, Ascot) associated
         with the markets selected by the MarketFilter. Currently,
@@ -92,8 +89,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('listVenues', request_class_object)
 
-    def list_market_catalogue(self, market_filter, market_projection, max_results, sort=None, locale=None):
-        # TODO Протестировать
+    def list_market_catalogue(self, request_class_object):
         '''
         Returns a list of information about published (ACTIVE/SUSPENDED)
          markets that does not change (or changes very rarely). You use
@@ -101,36 +97,10 @@ class BetFairAPIManagerBetting(BaseAPIManager):
           of selections and other information about markets.  Market Data
           Request Limits apply to requests made to listMarketCatalogue.
 
-        :param market_filter: The filter class to select desired
-        markets. All markets that match the
-        criteria in the filter are selected.
+        :param request_class_object: The ListMarketCatalogueForm object
 
-        :param market_projection: list of strings. The type and
-        amount of data returned about the market.
-
-        :param max_results: integer. limit on the total number of results
-        returned, must be greater than 0 and less than or equal to 1000
-
-        :param sort: string. The order of the results. Will default to
-        RANK if not passed. RANK is an assigned priority that is
-        determined by our Market Operations team in our back-end system.
-        A result's overall rank is derived from the ranking given to
-         the flowing attributes for the result. EventType, Competition,
-          StartTime, MarketType, MarketId. For example, EventType
-           is ranked by the most popular sports types and marketTypes
-           are ranked in the following order: ODDS ASIAN LINE RANGE If
-            all other dimensions of the result are equal, then the
-            results are ranked in MarketId order.
-
-        :param locale: string. The language used for the response.
-         If not specified, the default is returned.
         '''
-        data = {
-            'filter': market_filter.data, 'marketProjection': market_projection,
-            'maxResults': max_results, 'sort': sort, 'locale': locale}
-        response = self._make_request('listMarketCatalogue', data=data)
-        self.print_response(response)
-        return response.json()
+        return self.__request_with_dataclass('listMarketCatalogue', request_class_object)
 
     def list_market_book(self, market_ids, book_form=None):
         # TODO Протестировать
