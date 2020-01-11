@@ -21,5 +21,5 @@ from .rollup_model import RollupModel
 from .group_by import GroupBy
 from .bet_status import BetStatus
 from .time_in_force import TimeInForce
-from .bet_target_types import BetTargetType
+from .bet_target_type import BetTargetType
 from .price_ladder_type import PriceLadderType

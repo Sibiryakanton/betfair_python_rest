@@ -1,3 +1,3 @@
 from .marketfilter_and_locale import MarketFilterAndLocaleForm
 from .book_form import BookForm
-from .time_range import TimeRange
+from .marketfilter_and_time_granularity import MarketFilterAndTimeGranularityForm

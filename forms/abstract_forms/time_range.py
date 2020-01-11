@@ -1,5 +1,8 @@
+from dataclasses import dataclass
+from datetime import datetime
 
 
+@dataclass
 class TimeRange:
     '''
     The TimeRange can be useful in listClearedOrders request.
@@ -10,13 +13,12 @@ class TimeRange:
     list_current_orders_response = api_manager.list_current_orders(time_range=time_range_obj)
     ___
     '''
-    def __init__(self, from_date, to_date):
-        '''
-        :param from_date: datetime-object.
-        :param to_date: datetime-object
+    from_date: datetime.date
+    to_date: datetime.date
 
-        '''
-        self.data = {
-            'from': from_date,
-            'to': to_date
+    @property
+    def time_range_data(self):
+        return {
+            'from': self.from_date,
+            'to': self.to_date
         }

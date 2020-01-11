@@ -9,8 +9,8 @@ class BaseEnum(Enum):
     '''
     @classmethod
     def choices(cls):
-        return ((x.key, x.key) for x in cls)
+        return ((x.name, x.name) for x in cls)
 
     @classmethod
     def choices_with_descriptions(cls):
-        return ((x.key, x.value) for x in cls)
+        return ((x.name, x.value) for x in cls)

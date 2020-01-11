@@ -1,10 +1,9 @@
-from .base import BaseForm
 from datetime import datetime
 from dataclasses import dataclass
 
 
 @dataclass
-class AbstractMarketFilter(BaseForm):
+class MarketFilter:
     '''
     List of params of MarketFilter below.
         :param text_query: string, Restrict markets by any text associated
@@ -79,7 +78,7 @@ class AbstractMarketFilter(BaseForm):
     race_types: list = None
 
     @property
-    def data(self):
+    def market_filter_data(self):
         data = {
             'textQuery': self.text_query, 'eventTypeIds': self.event_type_ids,
             'eventIds': self.event_ids, 'competitionIds': self.competitions_ids,

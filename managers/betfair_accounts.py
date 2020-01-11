@@ -12,22 +12,36 @@ class BetFairAPIManagerAccounts(BaseAPIManager):
 
     root = 'https://api.betfair.com/exchange/account/rest/v1.0'
 
+    def create_developer_app_keys(self):
+        # TODO сделать запрос
+        pass
+
+    def get_developer_app_keys(self):
+        # TODO сделать запрос
+        pass
+
+    def get_account_funds(self):
+        # TODO сделать запрос
+
+        response = self._make_request('getAccountFunds', data={})
+        return response
+
+    def transfer_funds(self):
+        # TODO сделать запрос
+        pass
+
     def get_account_details(self):
-        response = self._make_request('getAccountDetails', root_index=1, data={})
+        # TODO сделать запрос
+
+        response = self._make_request('getAccountDetails', data={})
         self.print_response(response)
         return response
 
-    def get_account_funds(self):
-        response = self._make_request('getAccountFunds', root_index=1, data={})
-        return response
-
     def get_account_statement(self):
-        response = self._make_request('getAccountStatement', root_index=1, data={})
+        # TODO сделать запрос
+        response = self._make_request('getAccountStatement', data={})
         return response
 
-    def print_response(self, response):
-        '''
-        Not just response.json(), because we need indents
-        '''
-        if self.log_mode:
-            print(json.dumps(json.loads(response.text), indent=4))
+    def list_currency_rates(self):
+        # TODO сделать запрос
+        pass

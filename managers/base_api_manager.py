@@ -9,17 +9,25 @@ class BaseAPIManager:
     Базовый класс, который нужно использовать для каждого добавляемого API-менеджера
     '''
     session = requests.Session()
-    cert_login = 'https://identitysso-cert.betfair.com/api/certlogin'
+    cert_login = 'https://identitysso-cert.betfair.{}/api/certlogin'
 
-    def __init__(self, login, password, api_key, log_mode=False, session_token=None):
-        # TODO протестировать авторизацию
-
+    def __init__(self, login, password, api_key, log_mode=False, session_token=None, domain_area='com'):
+        '''
+        :param login:
+        :param password:
+        :param api_key:
+        :param log_mode: Set True, if you need print all responses of requests
+        :param session_token:
+        :param domain_area: string for domain area
+        (possible values: com, es (for Spanish Exchange) and it (for Italian Exchange))
+        '''
         self.log_mode = log_mode
         self.session_token = session_token
-
+        self.domain_area = domain_area
+        cert_auth_link = self.cert_login.format(domain_area)
         if session_token is None:
             cert_login_command = 'curl -q -k --cert /{} --key /{} {} -d "username={}&password={}" ' \
-                                 '-H "X-Application: {}"'.format(self.crt_path, self.crt_key_path, self.cert_login,
+                                 '-H "X-Application: {}"'.format(self.crt_path, self.crt_key_path, cert_auth_link,
                                                                  login, password, api_key)
             response = os.popen(cert_login_command).read()
             json_response = json.loads(response)
@@ -57,7 +65,27 @@ class BaseAPIManager:
         if self.log_mode:
             print(json.dumps(json.loads(response.text), indent=4))
 
-    def _make_request(self, relative_url, method_type='post', root_index=0, data=None):
+    def __request_with_dataclass(self, relative_url, request_object, method_type='post'):
+        '''
+        Some of the requests have a common request structure,
+         which can be easily put into a template function,
+         substituting a relative link
+        :param method_type: http request type. get for GET-request, post - for POST-requests
+
+        :param relative_url: relative url of method. I.e. if full url looks like that:
+        https://api.betfair.com/exchange/betting/rest/v1.0/listEventTypes/
+        There is will be root:
+        https://api.betfair.com/exchange/betting/rest/v1.0/
+        And listEventTypes - relative url
+
+        :param request_object: The form class with all request data. You can view the examples in forms directory
+        :return:
+        '''
+        response = self._make_request(relative_url, data=request_object.data, method_type=method_type)
+        self.print_response(response)
+        return response.json()
+
+    def _make_request(self, relative_url, method_type='post', data=None):
         '''
         In this method we just execute requests.post or requests.get, but with some nuances, written below
         :param method_type: http request type. get for GET-request, post - for POST-requests
@@ -68,14 +96,11 @@ class BaseAPIManager:
         https://api.betfair.com/exchange/betting/rest/v1.0/
         And listEventTypes - relative url
 
-        :param root_index: атрибут root класса апи-менеджера хранит список со строками, каждая из которых
-        является адресом на корень API. root_index - это просто номер нужного корня с отсчетом от 0
-
         :param data: данные, которые нужно передать в запросе
-
         :return:
         '''
-        url = '{}/{}/'.format(self.root, relative_url)
+        root = self.root.format(self.domain_area)
+        url = '{}/{}/'.format(root, relative_url)
         data = json.dumps(data)
         if method_type == 'get':
             response = self.session.get(url, params=data)

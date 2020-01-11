@@ -11,16 +11,17 @@ log = logging.getLogger('django.parsers')
 
 class BetFairAPIManagerBetting(BaseAPIManager):
     '''
-    The class provides the functional of Betfair Exchange API, described by company on link below:
+    The class provides the functional of Betfair
+    Exchange API, described by company on link below:
     https://docs.developer.betfair.com/
     '''
-    # TODO Составить полную карту запросов
 
-    root = 'https://api.betfair.com/exchange/betting/rest/v1.0'
+    root = 'https://api.betfair.{}/exchange/betting/rest/v1.0'
 
     def list_event_types(self, request_class_object):
         '''
-        Returns a list of Event Types (i.e. Sports) associated with the markets selected by the MarketFilter.
+        Returns a list of Event Types (i.e. Sports)
+         associated with the markets selected by the MarketFilter.
         Get list of event types (for example, Soccer, Basketball and etc)
         :param request_class_object: The MarketFilterAndLocaleForm object
         '''
@@ -28,7 +29,8 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
     def list_competitions(self, request_class_object):
         '''
-        Returns a list of Competitions (i.e., World Cup 2013, Bundesliga) associated with
+        Returns a list of Competitions
+        (i.e., World Cup 2013, Bundesliga) associated with
         the markets selected by the MarketFilter.
         Currently only Football markets have an associated competition.
 
@@ -37,21 +39,16 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('listCompetitions', request_class_object)
 
-    def list_time_ranges(self, market_filter, granularity):
+    def list_time_ranges(self, request_class_object):
         # TODO протестировать
         '''
-        :param market_filter: The filter class to select desired markets. All markets that match the
-        criteria in the filter are selected.
-
-        :param granularity: string. The granularity of time periods that correspond
-         to markets selected by the market filter. (possible values listed in TimeGranularity
+        Returns a list of time ranges in the granularity
+        specified in the request (i.e. 3PM to 4PM, Aug 14th to Aug 15th)
+        associated with the markets selected by the MarketFilter.
+        :param request_class_object: The MarketFilterAndTimeGranularityForm object
 
         '''
-
-        data = {'filter': market_filter.data, 'granularity': granularity}
-        response = self._make_request('listTimeRanges', data=data)
-        self.print_response(response)
-        return response.json()
+        return self.__request_with_dataclass('listTimeRanges', request_class_object)
 
     def list_events(self, request_class_object):
         '''
@@ -76,7 +73,8 @@ class BetFairAPIManagerBetting(BaseAPIManager):
     def list_countries(self, request_class_object):
         # TODO протестировать
         '''
-        Returns a list of Countries associated with the markets selected by the MarketFilter.
+        Returns a list of Countries associated with
+        the markets selected by the MarketFilter.
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
@@ -211,6 +209,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
                             customer_strategy_refs=None, date_range=None,
                             order_by=None, sort_dir=None,
                             from_record=None, record_count=None):
+        # TODO протестировать
         '''
         Returns a list of your current orders. Optionally you can
         filter and sort your current orders using the various
@@ -290,6 +289,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
                             settled_date_range=None, group_by=None,
                             include_item_descr=None, locale=None,
                             from_record=None, record_count=None):
+        # TODO Доделать запрос
         '''
         Returns a list of settled bets based on the bet status,
         ordered by settled date. To retrieve more than 1000
@@ -330,6 +330,8 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return response
 
     def place_order(self, market_id, selection_id, last_back_price, bet_amount):
+        # TODO Доделать запрос
+
         '''
         :param market_id:
         :param selection_id:
@@ -358,27 +360,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
     # TODO cancelOrders
     # TODO replaceOrders
     # TODO updateOrder
-    #
-    # Accounts API
-    def get_account_details(self):
-        response = self._make_request('getAccountDetails', root_index=1, data={})
-        self.print_response(response)
-        return response
-
-    def get_account_funds(self):
-        response = self._make_request('getAccountFunds', root_index=1, data={})
-        return response
-
-    def get_account_statement(self):
-        response = self._make_request('getAccountStatement', root_index=1, data={})
-        return response
-
-    def print_response(self, response):
-        '''
-        Not just response.json(), because we need print response with indent
-        '''
-        if self.log_mode:
-            print(json.dumps(json.loads(response.text), indent=4))
 
     def __request_with_dataclass(self, relative_url, request_object, method_type='post'):
         '''
