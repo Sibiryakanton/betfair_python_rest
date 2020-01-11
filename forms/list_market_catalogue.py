@@ -32,8 +32,7 @@ class ListMarketCatalogueForm(BaseForm, MarketFilter, MarketProjectionField, Loc
     results returned, must be greater than 0 and
      less than or equal to 1000
     '''
-
-    max_results: int = 1000
+    max_results: int = 500
     market_sort: str = None
 
     @property

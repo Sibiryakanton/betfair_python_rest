@@ -1,4 +1,4 @@
 from .marketfilter_and_locale import MarketFilterAndLocaleForm
-from .book_form import BookForm
 from .marketfilter_and_time_granularity import MarketFilterAndTimeGranularityForm
 from .list_market_catalogue import ListMarketCatalogueForm
+from .list_market_book import ListMarketBookForm

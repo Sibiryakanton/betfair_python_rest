@@ -98,29 +98,19 @@ class BetFairAPIManagerBetting(BaseAPIManager):
           Request Limits apply to requests made to listMarketCatalogue.
 
         :param request_class_object: The ListMarketCatalogueForm object
-
         '''
         return self.__request_with_dataclass('listMarketCatalogue', request_class_object)
 
-    def list_market_book(self, market_ids, book_form=None):
-        # TODO Протестировать
+    def list_market_book(self, request_class_object):
         '''
         Returns a list of dynamic data about markets.
         Dynamic data includes prices, the status of the market,
          the status of selections, the traded volume, and
          the status of any orders you have placed in the market.
 
-        :param market_ids: list of strings, one or more market ids.
-         The number of markets returned depends on the amount
-         of data you request via the price projection.
-        :param book_form: The BetFairBookForm object
+        :param request_class_object: The ListMarketBookForm object
         '''
-        data = {'marketIds': market_ids}
-        data.update(book_form.data)
-
-        response = self._make_request('listMarketBook', data=data)
-        self.print_response(response)
-        return response.json()
+        return self.__request_with_dataclass('listMarketBook', request_class_object)
 
     def list_runner_book(self, market_id, selection_id, handicap=None, book_form=None):
         # TODO протестировать
@@ -133,7 +123,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param market_id: The unique id for the market.
         :param handicap: The projection of price data you want to
         receive in the response.
-        :param book_form: The BetFairBookForm object
         '''
         data = {'marketId': market_id, 'selectionId': selection_id,
                 'handicap': handicap}
