@@ -166,7 +166,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('listClearedOrders', request_class_object)
 
-    def place_order(self, request_class_object):
+    def place_orders(self, request_class_object):
         # TODO Доделать запрос
         '''
         Place new orders into market.

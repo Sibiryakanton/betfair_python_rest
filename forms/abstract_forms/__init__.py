@@ -9,3 +9,6 @@ from .book_form import BookForm
 from .pagination_fields import RecordPagination
 from .events_and_event_type_ids import EventAndEventTypeIds
 from .customer_refs import CustomerRefs
+from .bet_limit_order import LimitOrder
+from .bet_limit_order_on_close import LimitOrderOnClose
+from .place_instruction import PlaceInstruction
