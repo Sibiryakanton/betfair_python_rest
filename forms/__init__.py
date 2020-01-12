@@ -4,3 +4,4 @@ from .list_market_catalogue import ListMarketCatalogueForm
 from .list_market_book import ListMarketBookForm
 from .list_runner_book import ListRunnerBookForm
 from .list_market_profit_and_loss import ListMarketProfitAndLossForm
+from .list_current_orders import ListCurrentOrdersForm

@@ -1,10 +1,10 @@
-from . import LocaleField, StrategyRefs, PriceProjection
+from . import LocaleField, StrategyRefs, PriceProjection, OrderProjectionField, BetIdsField
 from dataclasses import dataclass
 from datetime import datetime
 
 
 @dataclass
-class BookForm(LocaleField, StrategyRefs, PriceProjection):
+class BookForm(LocaleField, StrategyRefs, PriceProjection, OrderProjectionField, BetIdsField):
     '''
     Class for request method
     It should be used like that:
@@ -14,8 +14,6 @@ class BookForm(LocaleField, StrategyRefs, PriceProjection):
     list_event_types_response = api_manager.list_market_book(request_class_object=market_filter)
     ___
     You can find details about params in parent classes, some of them listed below:
-
-    :param order_projection: The orders you want to receive in the response.
 
     :param match_projection: If you ask for orders, specifies the
     representation of matches.
@@ -33,11 +31,6 @@ class BookForm(LocaleField, StrategyRefs, PriceProjection):
      before the specified date). All EXECUTABLE orders will
       be returned regardless of matched date.
 
-    :param bet_ids: If you ask for orders, restricts the results
-    to orders with the specified bet IDs. Omitting this parameter
-    means that all bets will be included in the response.
-    Please note: A maximum of 250 betId's can be provided at a time.
-
     '''
     order_projection: str = None
     match_projection: str = None
@@ -45,7 +38,6 @@ class BookForm(LocaleField, StrategyRefs, PriceProjection):
 
     currency_code: str = None
     matched_since: datetime.date = None
-    bet_ids: list = None
 
     @property
     def data(self):
@@ -53,6 +45,6 @@ class BookForm(LocaleField, StrategyRefs, PriceProjection):
                 'orderProjection': self.order_projection, 'matchProjection': self.match_projection,
                 'includeOverallPosition': self.include_overall_position,
                 'partitionMatchedByStrategyRef': self.partition_matched_by_strategy_ref,
-                'customerStrategyRefs': self.custom_strategy_refs,
+                'customerStrategyRefs': self.customer_strategy_refs,
                 'currencyCode': self.currency_code, 'locale': self.locale,
                 'matchedSince': self.matched_since, 'betIds': self.bet_ids}

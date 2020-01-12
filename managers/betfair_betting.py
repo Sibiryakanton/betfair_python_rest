@@ -132,6 +132,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         are implemented, markets of other types are silently ignored.
         To retrieve your profit and loss for CLOSED markets, please
         use the listClearedOrders request.
+
         :param request_class_object: The ListMarketProfitAndLossForm object
         '''
         return self.__request_with_dataclass('listMarketProfitAndLoss', request_class_object)

@@ -26,6 +26,6 @@ class ListRunnerBookForm(BaseForm, BookForm, SelectionIdField, MarketIdField):
                 'orderProjection': self.order_projection, 'matchProjection': self.match_projection,
                 'includeOverallPosition': self.include_overall_position,
                 'partitionMatchedByStrategyRef': self.partition_matched_by_strategy_ref,
-                'customerStrategyRefs': self.custom_strategy_refs,
+                'customerStrategyRefs': self.customer_strategy_refs,
                 'currencyCode': self.currency_code, 'locale': self.locale,
                 'matchedSince': self.matched_since, 'betIds': self.bet_ids}
