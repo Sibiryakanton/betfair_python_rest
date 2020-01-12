@@ -3,3 +3,4 @@ from .marketfilter_and_time_granularity import MarketFilterAndTimeGranularityFor
 from .list_market_catalogue import ListMarketCatalogueForm
 from .list_market_book import ListMarketBookForm
 from .list_runner_book import ListRunnerBookForm
+from .list_market_profit_and_loss import ListMarketProfitAndLossForm

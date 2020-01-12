@@ -14,6 +14,8 @@ class ListRunnerBookForm(BaseForm, BookForm, SelectionIdField, MarketIdField):
     list_event_types_response = api_manager.list_runner_book(request_class_object=market_filter)
     ___
     You can find details about params in parent classes
+
+    :param handicap: The projection of price data you want to receive in the response.
     '''
     handicap: float = None
 

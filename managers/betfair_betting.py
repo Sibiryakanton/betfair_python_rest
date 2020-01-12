@@ -124,9 +124,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('listRunnerBook', request_class_object)
 
-    def list_market_profit_and_loss(self, market_ids, include_settled_bets,
-                                    include_bsp_bets, net_of_commission):
-        # TODO протестировать
+    def list_market_profit_and_loss(self, request_class_object):
         '''
         Retrieve profit and loss for a given list of OPEN markets.
         The values are calculated using matched bets and optionally
@@ -134,32 +132,11 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         are implemented, markets of other types are silently ignored.
         To retrieve your profit and loss for CLOSED markets, please
         use the listClearedOrders request.
-
-        :param market_ids: List of markets to calculate profit and loss
-
-        :param include_settled_bets: boolean. Option to include settled bets
-        (partially settled markets only). Defaults to false if not specified.
-
-        :param include_bsp_bets: boolean. Option to include BSP bets.
-        Defaults to false if not specified.
-
-        :param net_of_commission: boolean. Option to return profit and
-        loss net of users current commission rate for this
-         market including any special tariffs. Defaults
-         to false if not specified.
-        :return:
+        :param request_class_object: The ListMarketProfitAndLossForm object
         '''
-        data = {'marketIds': market_ids, 'includeSettledBets': include_settled_bets,
-                'includeBspBets': include_bsp_bets, 'netOfCommission': net_of_commission}
-        response = self._make_request('listMarketProfitAndLoss', data=data)
-        self.print_response(response)
-        return response
+        return self.__request_with_dataclass('listMarketProfitAndLoss', request_class_object)
 
-    def list_current_orders(self, bet_ids=None, market_ids=None,
-                            order_projection=None, customer_order_refs=None,
-                            customer_strategy_refs=None, date_range=None,
-                            order_by=None, sort_dir=None,
-                            from_record=None, record_count=None):
+    def list_current_orders(self, request_class_object):
         # TODO протестировать
         '''
         Returns a list of your current orders. Optionally you can
@@ -170,143 +147,41 @@ class BetFairAPIManagerBetting(BaseAPIManager):
            more than 1000 orders, you need to make use of the
            fromRecord and recordCount parameters.
 
-        :param bet_ids: Optionally restricts the results to the
-        specified bet IDs. A maximum of 250 betId's, or a combination
-        of 250 betId's & marketId's are permitted.
+        :param request_class_object: The [] object
 
-        :param market_ids: Optionally restricts the results to
-         the specified market IDs. A maximum of 250 marketId's, or
-         a combination of 250 marketId's & betId's are permitted.
-
-        :param order_projection: Optionally restricts the results
-         to the specified order status.
-
-        :param customer_order_refs: Optionally restricts the results
-        to the specified customer order references.
-
-        :param customer_strategy_refs: Optionally restricts the
-        results to the specified customer strategy references.
-
-        :param date_range: TimeRange object. Optionally restricts
-        the results to be from/to the specified date, these dates
-         are contextual to the orders being returned and therefore
-         the dates used to filter on will change to placed,
-         matched, voided or settled dates depending on the
-         orderBy. This date is inclusive, i.e. if an order
-          was placed on exactly this date (to the millisecond)
-          then it will be included in the results. If the from
-           is later than the to, no results will be returned.
-
-        :param order_by: the string from OrderBy enum. Specifies
-        how the results will be ordered. If no value is passed in,
-        it defaults to BY_BET.  Also acts as a filter such that
-         only orders with a valid value in the field being ordered
-         by will be returned (i.e. BY_VOID_TIME returns only voided
-         orders, BY_SETTLED_TIME (applies to partially settled markets)
-         returns only settled orders and BY_MATCH_TIME returns only orders
-         with a matched date (voided, settled, matched orders)). Note that
-         specifying an orderBy parameter defines the context of the
-         date filter applied by the dateRange parameter (placed,
-         matched, voided or settled date) - see the dateRange
-         parameter description (above) for more information.
-
-        :param sort_dir: the string from SortDir enum. Specifies the
-        direction the results will be sorted in. If no value
-        is passed in, it defaults to EARLIEST_TO_LATEST.
-
-        :param from_record: integer. Specifies the first record
-        that will be returned. Records start at index zero, not at index one.
-        :param record_count: integer. Specifies how many records
-        will be returned from the index position 'fromRecord'. Note
-        that there is a page size limit of 1000. A value of zero
-        indicates that you would like all records (including and
-        from 'fromRecord') up to the limit.
         :return:
         '''
-        data = {'betIds': bet_ids, 'marketIds': market_ids,
-                'orderProjection': order_projection,
-                'customerOrderRefs': customer_order_refs,
-                'customerStrategyRefs': customer_strategy_refs,
-                'dateRange': date_range.data, 'orderBy': order_by, 'sortDir': sort_dir,
-                'fromRecord': from_record, 'recordCount': record_count}
-        response = self._make_request('listCurrentOrders', data=data)
-        self.print_response(response)
-        return response
+        return self.__request_with_dataclass('listCurrentOrders', request_class_object)
 
-    def list_cleared_orders(self, bet_status, event_type_ids=None,
-                            event_ids=None, market_ids=None, runner_ids=None,
-                            bet_ids=None, customer_order_refs=None,
-                            customer_strategy_refs=None, side=None,
-                            settled_date_range=None, group_by=None,
-                            include_item_descr=None, locale=None,
-                            from_record=None, record_count=None):
+    def list_cleared_orders(self, request_class_object):
         # TODO Доделать запрос
         '''
         Returns a list of settled bets based on the bet status,
         ordered by settled date. To retrieve more than 1000
         records, you need to make use of the fromRecord and
-        recordCount parameters. By default the service will
-        return all available data for the last 90 days (see
+        recordCount parameters.
+        By default the service will  return all
+        available data for the last 90 days (see
         Best Practice note below).  The fields available at
         each roll-up are available here
 
-        :param bet_status: Optionally restricts the results
-        :param event_type_ids: Optionally restricts the results
-        :param event_ids: Optionally restricts the results
-        :param market_ids: Optionally restricts the results
-        :param runner_ids: Optionally restricts the results
-        :param bet_ids: Optionally restricts the results
-        :param side: Optionally restricts the results
-        :param group_by: Optionally restricts the results
-        :param include_item_descr: Optionally restricts the results
-        :param locale: Optionally restricts the results
-        :param from_record: Optionally restricts the results
-        :param record_count: Optionally restricts the results
-
-        :param customer_order_refs: Optionally restricts the results
-        to the specified customer order references.
-
-        :param customer_strategy_refs: Optionally restricts the
-        results to the specified customer strategy references.
-
-
         '''
-        today = datetime.today()
-        data = {'betStatus': 'SETTLED',
-                'settledDateRange': {'from': str(today-timedelta(days=1000)),
-                                     'to': str(today+timedelta(days=7))}
-                }
-        response = self._make_request('listClearedOrders', data=data)
-        self.print_response(response)
-        return response
+        return self.__request_with_dataclass('listClearedOrders', request_class_object)
 
-    def place_order(self, market_id, selection_id, last_back_price, bet_amount):
+    def place_order(self, request_class_object):
         # TODO Доделать запрос
-
         '''
-        :param market_id:
-        :param selection_id:
-        :param last_back_price: last info about runner odd
-        :param bet_amount: the amount of money for bet
-        :return:
-        '''
-        min_price = round(float(last_back_price), 2)
+        Place new orders into market.
+        Please note that additional bet sizing rules
+        apply to bets placed into the Italian Exchange.
 
-        data = {'marketId': market_id,
-                'instructions': [
-                    {'orderType': 'LIMIT',
-                     'handicap': "0",
-                     "limitOrder": {"size": bet_amount, "price": min_price,
-                                    "persistenceType": "LAPSE"},
-                     'selectionId': selection_id,
-                     'side': 'BACK',
-                     'limitOnCloseOrder': {'liability': 3, 'price': min_price}
-                     }
-                ],
-                }
-        response = self._make_request('placeOrders', data=data)
-        self.print_response(response)
-        return response
+        In normal circumstances the placeOrders is an atomic operation.
+        PLEASE NOTE: if the 'Best Execution' features is switched
+        off, placeOrders can return ‘PROCESSED_WITH_ERRORS’
+        meaning that some bets can be rejected and other
+         placed when submitted in the same PlaceInstruction
+        '''
+        return self.__request_with_dataclass('placeOrders', request_class_object)
 
     # TODO cancelOrders
     # TODO replaceOrders
