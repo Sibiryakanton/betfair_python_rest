@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .customer_strategy_field import CustomerStrategyRefsField
+from . import CustomerStrategyRefsField
 
 
 @dataclass

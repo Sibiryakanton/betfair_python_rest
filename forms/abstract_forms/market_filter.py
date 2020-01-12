@@ -1,21 +1,16 @@
 from datetime import datetime
 from dataclasses import dataclass
+from .events_and_event_type_ids import EventAndEventTypeIds
 
 
 @dataclass
-class MarketFilter:
+class MarketFilter(EventAndEventTypeIds):
     '''
     List of params of MarketFilter below.
         :param text_query: string, Restrict markets by any text associated
         with the market such as the Name, Event, Competition, etc.
         You can include a wildcard (*) character as long as
          it is not the first character.
-
-        :param event_type_ids: list of strings, Restrict markets by event type associated
-        with the market. (i.e., Football, Hockey, etc)
-
-        :param event_ids: list of strings, Restrict markets by the event id associated
-         with the market.
 
         :param competitions_ids: list of strings, Restrict markets by the competitions
         associated with the market.
@@ -62,8 +57,6 @@ class MarketFilter:
         type (i.e. Hurdle, Flat, Bumper, Harness, Chase)
     '''
     text_query: str = None
-    event_type_ids: list = None
-    event_ids: list = None
     competitions_ids: list = None
     market_ids: list = None
     venues: list = None

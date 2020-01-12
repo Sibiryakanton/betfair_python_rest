@@ -1,12 +1,12 @@
 from .abstract_forms.base import BaseForm
 from .abstract_forms import (MarketIdsField, OrderProjectionField, BetIdsField,
-                             CustomerStrategyRefsField, TimeRange, RecordPagination)
+                             CustomerRefs, TimeRange, RecordPagination)
 from dataclasses import dataclass
 
 
 @dataclass
 class ListCurrentOrdersForm(BaseForm, BetIdsField, OrderProjectionField,
-                            CustomerStrategyRefsField, RecordPagination, MarketIdsField):
+                            CustomerRefs, RecordPagination, MarketIdsField):
     '''
     Class for request method
     It should be used like that:
@@ -19,8 +19,7 @@ class ListCurrentOrdersForm(BaseForm, BetIdsField, OrderProjectionField,
     :param market_ids: Optionally restricts the results to the
      specified market IDs. A maximum of 250 marketId's,
       or a combination of 250 marketId's & betId's are permitted.
-    :param customer_order_refs: Optionally restricts the
-    results to the specified customer order references.
+
     :param date_range: Optionally restricts the results to
      be from/to the specified date, these dates
       are contextual to the orders being returned
@@ -32,6 +31,7 @@ class ListCurrentOrdersForm(BaseForm, BetIdsField, OrderProjectionField,
        then it will be included in the results.
        If the from is later than the to, no results
         will be returned.
+
     :param order_by: Specifies how the results will be ordered.
     If no value is passed in, it defaults to BY_BET.
     Also acts as a filter such that only orders with
@@ -46,6 +46,7 @@ class ListCurrentOrdersForm(BaseForm, BetIdsField, OrderProjectionField,
         voided or settled date) - see the dateRange parameter
         description (above) for more information.
         See also the OrderBy enum.
+
     :param sort_dir: Specifies the direction the
     results will be sorted in.
     If no value is passed in, it defaults to EARLIEST_TO_LATEST.

@@ -138,7 +138,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listMarketProfitAndLoss', request_class_object)
 
     def list_current_orders(self, request_class_object):
-        # TODO протестировать
         '''
         Returns a list of your current orders. Optionally you can
         filter and sort your current orders using the various
@@ -155,7 +154,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listCurrentOrders', request_class_object)
 
     def list_cleared_orders(self, request_class_object):
-        # TODO Доделать запрос
         '''
         Returns a list of settled bets based on the bet status,
         ordered by settled date. To retrieve more than 1000
@@ -165,7 +163,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         available data for the last 90 days (see
         Best Practice note below).  The fields available at
         each roll-up are available here
-
         '''
         return self.__request_with_dataclass('listClearedOrders', request_class_object)
 

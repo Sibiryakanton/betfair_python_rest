@@ -12,12 +12,3 @@ class OrderProjectionField:
 
     '''
     order_projection: str = None
-
-    @property
-    def price_projection_data(self):
-        return {
-            'priceData': self.price_data,
-            'exBestOffersOverrides': self.ex_best_offers_overrides_data,
-            'virtualise': self.virtualise,
-            'rolloverStakes': self.rollover_stakes,
-        }
