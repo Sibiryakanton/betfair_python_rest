@@ -12,7 +12,7 @@ class CancelInstruction:
 
     '''
     bet_id: str
-    size_reduction: float
+    size_reduction: float = None
 
     @property
     def data(self):

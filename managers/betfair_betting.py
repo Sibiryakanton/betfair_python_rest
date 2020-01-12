@@ -182,7 +182,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('placeOrders', request_class_object)
 
     def cancel_orders(self, request_class_object):
-        # TODO Доделать
         '''
         Cancel all bets OR cancel all bets
         on a market OR fully or partially

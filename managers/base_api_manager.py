@@ -101,7 +101,8 @@ class BaseAPIManager:
         '''
         root = self.root.format(self.domain_area)
         url = '{}/{}/'.format(root, relative_url)
-        data = json.dumps(data)
+        data = json.dumps(data, indent=4)
+        print(data)
         if method_type == 'get':
             response = self.session.get(url, params=data)
         else:

@@ -44,7 +44,7 @@ class PlaceOrderForm(BaseForm, CustomerStrategyRefsField, MarketIdField, PlaceIn
     @property
     def data(self):
         return {'marketId': self.market_id,
-                'instructions': self.instructions.data,
+                'instructions': self.instructions_data,
                 'customerRef': self.customer_ref,
                 'marketVersion': {'version': self.market_version},
                 'customerStrategyRef': self.customer_strategy_refs,

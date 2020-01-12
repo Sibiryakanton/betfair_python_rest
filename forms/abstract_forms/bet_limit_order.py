@@ -4,7 +4,7 @@ from . import SelectionIdField
 
 
 @dataclass
-class LimitOrder(SelectionIdField):
+class LimitOrder:
     '''
     Place a new LIMIT order (simple exchange bet for immediate execution)
     :param size: The size of the bet. Please note:

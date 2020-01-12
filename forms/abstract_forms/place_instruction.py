@@ -58,13 +58,17 @@ class PlaceInstruction(SelectionIdField):
 
     @property
     def data(self):
+        if self.market_on_close_order_liability:
+            market_close = {'liability': self.market_on_close_order_liability}
+        else:
+            market_close = None
         return {
             'orderType': self.order_type,
             'selectionId': self.selection_id,
             'handicap': self.handicap,
             'side': self.side,
-            'limitOrder': self.limit_order.data,
-            'limitOnCloseOrder': self.limit_on_close_order.data,
-            'marketOnCloseOrder': {'liability': self.market_on_close_order_liability},
+            'limitOrder': self.limit_order.data if self.limit_order else None,
+            'limitOnCloseOrder': self.limit_on_close_order.data if self.limit_on_close_order else None,
+            'marketOnCloseOrder': market_close,
             'customerOrderRef': self.customer_order_ref,
         }

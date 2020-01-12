@@ -9,4 +9,4 @@ from .list_cleared_order import ListClearedOrdersForm
 from .place_orders import PlaceOrderForm
 from .cancel_orders import CancelOrdersForm
 
-from .abstract_forms import PlaceInstruction, CancelInstruction
+from .abstract_forms import PlaceInstruction, CancelInstruction, LimitOrder, LimitOrderOnClose

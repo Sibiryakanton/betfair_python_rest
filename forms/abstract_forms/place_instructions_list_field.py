@@ -12,5 +12,6 @@ class PlaceInstructionsField:
     '''
     instructions: List[PlaceInstruction]
 
-    def data(self):
+    @property
+    def instructions_data(self):
         return [bet.data for bet in self.instructions]
