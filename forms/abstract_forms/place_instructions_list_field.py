@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import List
-from .. import PlaceInstruction
+from . import PlaceInstruction
 
 
 @dataclass

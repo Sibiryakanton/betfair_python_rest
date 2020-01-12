@@ -12,3 +12,5 @@ from .customer_refs import CustomerRefs
 from .bet_limit_order import LimitOrder
 from .bet_limit_order_on_close import LimitOrderOnClose
 from .place_instruction import PlaceInstruction
+from .cancel_instruction import CancelInstruction
+from .place_instructions_list_field import PlaceInstructionsField

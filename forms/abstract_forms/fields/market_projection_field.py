@@ -9,4 +9,4 @@ class MarketProjectionField:
          amount of data returned about the market.
          The variables listed in MarketProjection enum
     '''
-    market_projection: str = None
+    market_projection: list = None

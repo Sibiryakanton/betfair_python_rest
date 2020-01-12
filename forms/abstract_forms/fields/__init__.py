@@ -10,4 +10,5 @@ from .market_id_field import MarketIdField
 from .selection_id_field import SelectionIdField
 from .runner_ids_field import RunnerIdsField
 from .bet_status_field import BetStatusField
-from .instructions_field import PlaceInstructionsField
+from .customer_ref_field import CustomerRefField
+

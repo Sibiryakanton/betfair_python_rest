@@ -6,7 +6,7 @@ from . import SelectionIdField, LimitOrder, LimitOrderOnClose
 class PlaceInstruction(SelectionIdField):
     '''
     Instruction to place a new order
-    :param order_type:
+    :param order_type: string, see OrderType enum
 
     :param handicap: The handicap associated with the
      runner in case of Asian handicap markets (e.g.

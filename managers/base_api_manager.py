@@ -101,15 +101,7 @@ class BaseAPIManager:
         '''
         root = self.root.format(self.domain_area)
         url = '{}/{}/'.format(root, relative_url)
-        from datetime import datetime, timedelta
-        today = datetime.now().date()
-
-        data = {'betStatus': 'SETTLED',
-                'settledDateRange': {'from': str(today-timedelta(days=1000)),
-                                     'to': str(today+timedelta(days=7))}
-                }
         data = json.dumps(data)
-        print(data)
         if method_type == 'get':
             response = self.session.get(url, params=data)
         else:

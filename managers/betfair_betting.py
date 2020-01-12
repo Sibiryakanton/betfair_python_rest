@@ -167,7 +167,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listClearedOrders', request_class_object)
 
     def place_orders(self, request_class_object):
-        # TODO Доделать запрос
+        # TODO Протестировать
         '''
         Place new orders into market.
         Please note that additional bet sizing rules
@@ -181,7 +181,17 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('placeOrders', request_class_object)
 
-    # TODO cancelOrders
+    def cancel_orders(self, request_class_object):
+        # TODO Доделать
+        '''
+        Cancel all bets OR cancel all bets
+        on a market OR fully or partially
+        cancel particular orders on a market.
+         Only LIMIT orders can be cancelled
+         or partially cancelled once placed.
+        '''
+        return self.__request_with_dataclass('cancelOrders', request_class_object)
+
     # TODO replaceOrders
     # TODO updateOrder
 
