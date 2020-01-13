@@ -35,6 +35,28 @@ class APINGExceptionsEnum(Enum):
      they have an App Key restriction in place or 
      attempting to place a bet from a restricted jurisdiction.'''
 
+    # Accounts API Exceptions
+    DUPLICATE_APP_NAME = '''Duplicate application name'''
+    APP_KEY_CREATION_FAILED = '''Creating application key version has failed'''
+    APP_CREATION_FAILED = '''Application creation has been failed'''
+    SUBSCRIPTION_EXPIRED = '''An application key is required for this operation'''
+    INVALID_SUBSCRIPTION_TOKEN = '''The subscription token provided doesn't exist'''
+    INVALID_CLIENT_REF = '''Invalid length for the client reference'''
+    WALLET_TRANSFER_ERROR = '''There was a problem transferring 
+    funds between your wallets'''
+    INVALID_VENDOR_CLIENT_ID = '''The vendor client ID is not 
+    subscribed to this application key'''
+    USER_NOT_SUBSCRIBED = '''The user making the request is not 
+    subscribed to the application key they are trying to 
+    perform the action on (e.g. creating an Authorisation Code)'''
+    INVALID_SECRET = '''The vendor making the request has provided 
+    a vendor secret that does not match our records'''
+    INVALID_AUTH_CODE = '''The vendor making the request has not 
+    provided a valid authorisation cod'''
+    INVALID_GRANT_TYPE = '''The vendor making the request has not
+     provided a valid grant_type, or the grant_type they have
+      passed does not match the parameters (authCode/refreshToken)'''
+
     @classmethod
     def get_description(cls, status):
         return getattr(cls, status).value

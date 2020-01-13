@@ -1,3 +1,6 @@
+Python package of REST API managers (Betting and Accounts APIs)
+
+
 HOW TO INSTALL
 
 # TODO Upload on pypi
