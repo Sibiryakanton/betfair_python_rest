@@ -93,7 +93,6 @@ class BaseAPIManager:
         :return:
         '''
         response = self._make_request(relative_url, data=request_object.data, method_type=method_type).json()
-        self.print_response(response)
         self.__check_exceptions(json_response=response)
         return response
 
@@ -119,6 +118,7 @@ class BaseAPIManager:
             response = self.session.get(url, params=data)
         else:
             response = self.session.post(url, data=data)
+        self.print_response(response.json())
         return response
 
     def __check_exceptions(self, json_response):

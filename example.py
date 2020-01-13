@@ -1,6 +1,6 @@
 import os
 
-from managers import BetFairAPIManagerBetting
+from managers import BetFairAPIManagerBetting, BetFairAPIManagerAccounts
 from forms import (MarketFilterAndTimeGranularityForm, MarketFilterAndLocaleForm,
                    ListMarketCatalogueForm, ListMarketBookForm, ListRunnerBookForm,
                    ListMarketProfitAndLossForm, ListCurrentOrdersForm, LimitOrder,
@@ -135,6 +135,38 @@ class APIBettingTestCase:
         list_runner_book_form = UpdateOrdersForm(market_id=self.market_id, instructions=[instruction])
         self.api_manager.update_orders(request_class_object=list_runner_book_form)
 
+
+class AccountsAPITestCase:
+    login = None
+    password = None
+    api_key = None
+
+    def __init__(self):
+        self.api_manager = BetFairAPIManagerAccounts(self.login, self.password,
+                                                     self.api_key, log_mode=True,
+                                                     raise_exceptions=True)
+
+    def test_get_developer_app_keys(self):
+        self.api_manager.get_developer_app_keys()
+
+    def test_get_account_funds(self):
+        self.api_manager.get_account_funds()
+
+    def test_transfer_funds(self):
+        self.api_manager.transfer_funds()
+
+    def test_get_account_details(self):
+        self.api_manager.get_account_details()
+
+    def test_get_account_statement(self):
+        self.api_manager.get_account_statement()
+
+    def test_list_currency_rates(self):
+        self.api_manager.list_currency_rates()
+
+
+accounts_manager = AccountsAPITestCase()
+accounts_manager.test_list_currency_rates()
 
 test_manager = APIBettingTestCase()
 test_manager.test_list_event_types()
