@@ -14,8 +14,13 @@ from datetime import datetime, timedelta
 
 
 class CustomBetFairAPIManagerBetting(BetFairAPIManagerBetting):
-    crt_path = os.path.join('home', 'antonssd', 'Django-u', 'sportmind', 'client-2048.crt')
-    crt_key_path = os.path.join('home', 'antonssd', 'Django-u', 'sportmind', 'client-2048.key')
+    crt_path = os.path.join('home', 'user', 'your_project', 'client-2048.crt')
+    crt_key_path = os.path.join('home', 'user', 'your_project-u', 'client-2048.key')
+
+
+class CustomBetFairAPIManagerAccounts(BetFairAPIManagerAccounts):
+    crt_path = os.path.join('home', 'user', 'your_project', 'client-2048.crt')
+    crt_key_path = os.path.join('home', 'user', 'your_project-u', 'client-2048.key')
 
 
 class APIBettingTestCase:
@@ -142,9 +147,9 @@ class AccountsAPITestCase:
     api_key = None
 
     def __init__(self):
-        self.api_manager = BetFairAPIManagerAccounts(self.login, self.password,
-                                                     self.api_key, log_mode=True,
-                                                     raise_exceptions=True)
+        self.api_manager = CustomBetFairAPIManagerAccounts(self.login, self.password,
+                                                           self.api_key, log_mode=True,
+                                                           raise_exceptions=True)
 
     def test_get_developer_app_keys(self):
         self.api_manager.get_developer_app_keys()
