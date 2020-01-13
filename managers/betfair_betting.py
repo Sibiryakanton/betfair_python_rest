@@ -25,7 +25,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         Get list of event types (for example, Soccer, Basketball and etc)
         :param request_class_object: The MarketFilterAndLocaleForm object
         '''
-        return self.__request_with_dataclass('listEventTypes', request_class_object)
+        return self._request_with_dataclass('listEventTypes', request_class_object)
 
     def list_competitions(self, request_class_object):
         '''
@@ -37,7 +37,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_dataclass('listCompetitions', request_class_object)
+        return self._request_with_dataclass('listCompetitions', request_class_object)
 
     def list_time_ranges(self, request_class_object):
         '''
@@ -47,7 +47,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndTimeGranularityForm object
 
         '''
-        return self.__request_with_dataclass('listTimeRanges', request_class_object)
+        return self._request_with_dataclass('listTimeRanges', request_class_object)
 
     def list_events(self, request_class_object):
         '''
@@ -56,7 +56,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
         :param request_class_object: The MarketFilterAndLocaleForm object
         '''
-        return self.__request_with_dataclass('listEvents', request_class_object)
+        return self._request_with_dataclass('listEvents', request_class_object)
 
     def list_market_types(self, request_class_object):
         '''
@@ -67,7 +67,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_dataclass('listMarketTypes', request_class_object)
+        return self._request_with_dataclass('listMarketTypes', request_class_object)
 
     def list_countries(self, request_class_object):
         '''
@@ -76,7 +76,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_dataclass('listCountries', request_class_object)
+        return self._request_with_dataclass('listCountries', request_class_object)
 
     def list_venues(self, request_class_object):
         '''
@@ -87,7 +87,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The MarketFilterAndLocaleForm object
 
         '''
-        return self.__request_with_dataclass('listVenues', request_class_object)
+        return self._request_with_dataclass('listVenues', request_class_object)
 
     def list_market_catalogue(self, request_class_object):
         '''
@@ -99,7 +99,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
         :param request_class_object: The ListMarketCatalogueForm object
         '''
-        return self.__request_with_dataclass('listMarketCatalogue', request_class_object)
+        return self._request_with_dataclass('listMarketCatalogue', request_class_object)
 
     def list_market_book(self, request_class_object):
         '''
@@ -110,7 +110,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
         :param request_class_object: The ListMarketBookForm object
         '''
-        return self.__request_with_dataclass('listMarketBook', request_class_object)
+        return self._request_with_dataclass('listMarketBook', request_class_object)
 
     def list_runner_book(self, request_class_object):
         '''
@@ -122,7 +122,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         :param request_class_object: The ListRunnerBookForm object
 
         '''
-        return self.__request_with_dataclass('listRunnerBook', request_class_object)
+        return self._request_with_dataclass('listRunnerBook', request_class_object)
 
     def list_market_profit_and_loss(self, request_class_object):
         '''
@@ -135,7 +135,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
         :param request_class_object: The ListMarketProfitAndLossForm object
         '''
-        return self.__request_with_dataclass('listMarketProfitAndLoss', request_class_object)
+        return self._request_with_dataclass('listMarketProfitAndLoss', request_class_object)
 
     def list_current_orders(self, request_class_object):
         '''
@@ -151,7 +151,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
 
         :return:
         '''
-        return self.__request_with_dataclass('listCurrentOrders', request_class_object)
+        return self._request_with_dataclass('listCurrentOrders', request_class_object)
 
     def list_cleared_orders(self, request_class_object):
         '''
@@ -164,7 +164,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         Best Practice note below).  The fields available at
         each roll-up are available here
         '''
-        return self.__request_with_dataclass('listClearedOrders', request_class_object)
+        return self._request_with_dataclass('listClearedOrders', request_class_object)
 
     def place_orders(self, request_class_object):
         '''
@@ -178,7 +178,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         meaning that some bets can be rejected and other
          placed when submitted in the same PlaceInstruction
         '''
-        return self.__request_with_dataclass('placeOrders', request_class_object)
+        return self._request_with_dataclass('placeOrders', request_class_object)
 
     def cancel_orders(self, request_class_object):
         '''
@@ -188,7 +188,7 @@ class BetFairAPIManagerBetting(BaseAPIManager):
          Only LIMIT orders can be cancelled
          or partially cancelled once placed.
         '''
-        return self.__request_with_dataclass('cancelOrders', request_class_object)
+        return self._request_with_dataclass('cancelOrders', request_class_object)
 
     def replace_orders(self, request_class_object):
         '''
@@ -201,30 +201,10 @@ class BetFairAPIManagerBetting(BaseAPIManager):
           be placed the cancellations will not be rolled
            back. See ReplaceInstruction.
         '''
-        return self.__request_with_dataclass('replaceOrders', request_class_object)
+        return self._request_with_dataclass('replaceOrders', request_class_object)
 
     def update_orders(self, request_class_object):
         '''
         Update non-exposure changing fields
         '''
-        return self.__request_with_dataclass('updateOrder', request_class_object)
-
-    def __request_with_dataclass(self, relative_url, request_object, method_type='post'):
-        '''
-        Some of the requests have a common request structure,
-         which can be easily put into a template function,
-         substituting a relative link
-        :param method_type: http request type. get for GET-request, post - for POST-requests
-
-        :param relative_url: relative url of method. I.e. if full url looks like that:
-        https://api.betfair.com/exchange/betting/rest/v1.0/listEventTypes/
-        There is will be root:
-        https://api.betfair.com/exchange/betting/rest/v1.0/
-        And listEventTypes - relative url
-
-        :param request_object: The form class with all request data. You can view the examples in forms directory
-        :return:
-        '''
-        response = self._make_request(relative_url, data=request_object.data, method_type=method_type)
-        self.print_response(response)
-        return response.json()
+        return self._request_with_dataclass('updateOrder', request_class_object)

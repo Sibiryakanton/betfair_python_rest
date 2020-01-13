@@ -1,3 +1,5 @@
+from api_exceptions.base_exception import BetFairAPIManagerException
+
 import requests
 import json
 from abc import abstractmethod
@@ -11,25 +13,34 @@ class BaseAPIManager:
     session = requests.Session()
     cert_login = 'https://identitysso-cert.betfair.{}/api/certlogin'
 
-    def __init__(self, login, password, api_key, log_mode=False, session_token=None, domain_area='com'):
+    def __init__(self, login, password, api_key, log_mode=False, session_token=None,
+                 domain_area='com', raise_exceptions=False):
         '''
         :param login:
         :param password:
         :param api_key:
-        :param log_mode: Set True, if you need print all responses of requests
+        :param log_mode: Set True, if you need print
+        all responses of requests
         :param session_token:
-        :param domain_area: string for domain area
-        (possible values: com, es (for Spanish Exchange) and it (for Italian Exchange))
+        :param domain_area: string for domain area (possible values:
+        com, es (for Spanish Exchange) and it (for Italian Exchange))
+        :param raise_exceptions: Change on True, if you need to
+         get the raise exceptions, if server return the error.
+         Otherwise you will get just server response
+
         '''
         self.log_mode = log_mode
         self.session_token = session_token
         self.domain_area = domain_area
+        self.raise_exceptions = raise_exceptions
+
         cert_auth_link = self.cert_login.format(domain_area)
         if session_token is None:
             cert_login_command = 'curl -q -k --cert /{} --key /{} {} -d "username={}&password={}" ' \
                                  '-H "X-Application: {}"'.format(self.crt_path, self.crt_key_path, cert_auth_link,
                                                                  login, password, api_key)
             response = os.popen(cert_login_command).read()
+            print(response)
             json_response = json.loads(response)
             self.session_token = json_response['sessionToken']
         self.session.headers = {'X-Application': api_key, 'X-Authentication': self.session_token,
@@ -63,9 +74,9 @@ class BaseAPIManager:
         Not just response.json(), because we need print response with indent
         '''
         if self.log_mode:
-            print(json.dumps(json.loads(response.text), indent=4))
+            print(json.dumps(response, indent=4))
 
-    def __request_with_dataclass(self, relative_url, request_object, method_type='post'):
+    def _request_with_dataclass(self, relative_url, request_object, method_type='post'):
         '''
         Some of the requests have a common request structure,
          which can be easily put into a template function,
@@ -81,9 +92,10 @@ class BaseAPIManager:
         :param request_object: The form class with all request data. You can view the examples in forms directory
         :return:
         '''
-        response = self._make_request(relative_url, data=request_object.data, method_type=method_type)
+        response = self._make_request(relative_url, data=request_object.data, method_type=method_type).json()
         self.print_response(response)
-        return response.json()
+        self.__check_exceptions(json_response=response)
+        return response
 
     def _make_request(self, relative_url, method_type='post', data=None):
         '''
@@ -108,3 +120,10 @@ class BaseAPIManager:
         else:
             response = self.session.post(url, data=data)
         return response
+
+    def __check_exceptions(self, json_response):
+        if self.raise_exceptions:
+            print(json_response)
+
+            if 'detail' in json_response.keys():
+                raise BetFairAPIManagerException(json_response['detail']['APINGException']['errorCode'])
