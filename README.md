@@ -4,7 +4,7 @@ Python package of REST API managers (Betting and Accounts APIs)
 HOW TO INSTALL
 
 # TODO Upload on pypi
-pip install betfair_python_rest
+pip install betfair-python-rest
 
 Create your own class based on the one that comes 
 in the package, indicating the certificate information. Example:
