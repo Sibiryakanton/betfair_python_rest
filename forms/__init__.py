@@ -9,6 +9,8 @@ from .list_cleared_order import ListClearedOrdersForm
 from .place_orders import PlaceOrderForm
 from .cancel_orders import CancelOrdersForm
 from .replace_orders import ReplaceOrdersForm
+from .update_orders import UpdateOrdersForm
 
 from .abstract_forms import (PlaceInstruction, CancelInstruction,
-                             ReplaceInstruction, LimitOrder, LimitOrderOnClose)
+                             ReplaceInstruction, UpdateInstruction,
+                             LimitOrder, LimitOrderOnClose)

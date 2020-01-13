@@ -1,11 +1,13 @@
 from .abstract_forms.base import BaseForm
-from .abstract_forms import (MarketIdField, CustomerStrategyRefsField,
-                             PlaceInstructionsField, PlaceAndReplaceOrdersFields)
+from .abstract_forms import (CustomerStrategyRefsField,
+                             PlaceInstructionsField,
+                             PlaceAndReplaceOrdersFields)
 from dataclasses import dataclass
 
 
 @dataclass
-class PlaceOrderForm(BaseForm, CustomerStrategyRefsField, PlaceAndReplaceOrdersFields, PlaceInstructionsField):
+class PlaceOrderForm(BaseForm, CustomerStrategyRefsField,
+                     PlaceAndReplaceOrdersFields, PlaceInstructionsField):
     '''
     Class for request method
     It should be used like that:
