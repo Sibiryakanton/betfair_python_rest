@@ -3,7 +3,6 @@ Python package of REST API managers (Betting and Accounts APIs)
 
 HOW TO INSTALL
 
-# TODO Upload on pypi
 pip install betfair-python-rest
 
 Create your own class based on the one that comes 
