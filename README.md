@@ -30,7 +30,7 @@ enum with variables of error code from server
 File with examples of using: example.py
 
 I should clarify a one point: API-methods in Betting branch waiting for 
-    form classes objects, not jus arguments array. This was done due to the 
+    form classes objects, not just arguments array. This was done due to the 
     fact that many methods accept the same fields, 
     and sometimes entire sets of fields, and in order to avoid copy-paste 
     of attributes and docstring into dozens of models, it was decided to
