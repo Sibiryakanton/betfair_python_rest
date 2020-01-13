@@ -13,4 +13,7 @@ from .bet_limit_order import LimitOrder
 from .bet_limit_order_on_close import LimitOrderOnClose
 from .place_instruction import PlaceInstruction
 from .cancel_instruction import CancelInstruction
+from .replace_instruction import ReplaceInstruction
 from .place_instructions_list_field import PlaceInstructionsField
+from .replace_instructions_list_field import ReplaceInstructionsField
+from .place_replace_fields import PlaceAndReplaceOrdersFields

@@ -167,7 +167,6 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         return self.__request_with_dataclass('listClearedOrders', request_class_object)
 
     def place_orders(self, request_class_object):
-        # TODO Протестировать
         '''
         Place new orders into market.
         Please note that additional bet sizing rules
@@ -191,8 +190,24 @@ class BetFairAPIManagerBetting(BaseAPIManager):
         '''
         return self.__request_with_dataclass('cancelOrders', request_class_object)
 
-    # TODO replaceOrders
-    # TODO updateOrder
+    def replace_orders(self, request_class_object):
+        '''
+        This operation is logically a bulk cancel
+        followed by a bulk place. The cancel is completed
+        first then the new orders are placed. The new
+         orders will be placed atomically in that
+          they will all be placed or none will be
+          placed. In the case where the new orders cannot
+          be placed the cancellations will not be rolled
+           back. See ReplaceInstruction.
+        '''
+        return self.__request_with_dataclass('replaceOrders', request_class_object)
+
+    def update_orders(self, request_class_object):
+        '''
+        Update non-exposure changing fields
+        '''
+        return self.__request_with_dataclass('updateOrder', request_class_object)
 
     def __request_with_dataclass(self, relative_url, request_object, method_type='post'):
         '''

@@ -8,5 +8,7 @@ from .list_current_orders import ListCurrentOrdersForm
 from .list_cleared_order import ListClearedOrdersForm
 from .place_orders import PlaceOrderForm
 from .cancel_orders import CancelOrdersForm
+from .replace_orders import ReplaceOrdersForm
 
-from .abstract_forms import PlaceInstruction, CancelInstruction, LimitOrder, LimitOrderOnClose
+from .abstract_forms import (PlaceInstruction, CancelInstruction,
+                             ReplaceInstruction, LimitOrder, LimitOrderOnClose)
