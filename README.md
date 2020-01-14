@@ -2,17 +2,22 @@ Python package of REST API managers (Betting and Accounts APIs)
 
 
 <h5>HOW TO INSTALL</h5>
+
 ```
 pip install betfair-python-rest
 ```
+
 Create your own class based on the one that comes 
 in the package, indicating the certificate information. Example:
+
 ```
 class CustomBetFairAPIManagerBetting(BetFairAPIManagerBetting):
     crt_path = os.path.join('home', 'user', 'your_project', 'client-2048.crt')
     crt_key_path = os.path.join('home', 'user', 'your_project-u', 'client-2048.key')
 ```
+
 Now you can use it like that:
+
 ```
 api_manager = CustomBetFairAPIManagerBetting(login, password, api_key, log_mode=True)
 market_and_locale = MarketFilterAndLocaleForm(text_query='Soccer')
