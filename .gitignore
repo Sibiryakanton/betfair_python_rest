@@ -1,7 +1,6 @@
 __pycache__
 .idea
 api_test.py
-setup.py
 *.egg-info
 build
 dist
