@@ -1,7 +1,7 @@
 Python package of REST API managers (Betting and Accounts APIs)
 
 
-HOW TO INSTALL
+<h5>HOW TO INSTALL</h5>
 ```
 pip install betfair-python-rest
 ```
@@ -22,13 +22,17 @@ api_manager.list_event_types(request_class_object=market_and_locale)
 HOW TO USE (with examples)
 
 In short, the package is designed like this:
+
 managers - API-managers classes
+
 forms - Classes which describing the schemes of data inputs for every method
+
 enums - Classes with a list of possible options for parameter values.
+
 exceptions - There is just two files: exceptions class and
 enum with variables of error code from server 
 
-File with examples of using: example.py
+<b> File with examples of using: example.py</b>
 
 I should clarify a one point: API-methods in Betting branch waiting for 
 form classes objects, not just arguments array. This was done due to the 
