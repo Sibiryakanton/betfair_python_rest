@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="betfair_python_rest",
-    version="1.0.3",
+    version="0.1",
     author="Anton Igin",
     author_email="antonigin1995@gmail.com",
     description="Python package of REST API managers (Betting and Accounts APIs)",
