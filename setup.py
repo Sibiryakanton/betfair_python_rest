@@ -3,6 +3,9 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open("requirements.txt", "r") as req:
+    requires = req.read().strip().split('\n')
+
 setuptools.setup(
     name="betfair_python_rest",
     version="0.1",
@@ -13,6 +16,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url='https://github.com/Sibiryakanton/betfair_python_rest',
     packages=setuptools.find_packages(),
+    install_requires = requires,
     classifiers=[
         "Programming Language :: Python :: 3",
     ],
