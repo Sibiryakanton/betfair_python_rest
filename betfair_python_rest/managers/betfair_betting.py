@@ -1,12 +1,4 @@
-import json
-import os
-import requests
-from datetime import timedelta, datetime
-import logging
-from abc import abstractmethod
 from .base_api_manager import BaseAPIManager
-
-log = logging.getLogger('django.parsers')
 
 
 class BetFairAPIManagerBetting(BaseAPIManager):

@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as req:
 
 setuptools.setup(
     name="betfair_python_rest",
-    version="0.11",
+    version="0.13",
     author="Anton Igin",
     author_email="antonigin1995@gmail.com",
     description="Python package of REST API managers (Betting and Accounts APIs)",

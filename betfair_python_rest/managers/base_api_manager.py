@@ -1,4 +1,4 @@
-from api_exceptions.base_exception import BetFairAPIManagerException
+from ..api_exceptions.base_exception import BetFairAPIManagerException
 
 import requests
 import json
